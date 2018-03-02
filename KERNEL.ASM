@@ -10,6 +10,8 @@
 	
 	JMP CherrySodaEntry						; Jump to the kernel entry point
 	
+	InitMSG		DB 'CherrySodaOS', 13, 10, 0
+	
 	InitSys:
 		MOV AH, 09h
 		MOV AL, ' '
@@ -20,6 +22,10 @@
 		
 		MOV SI, InitMSG
 		CALL Print16
+		
+		
+		
+		RET
 		
 	Print16:
 		PUSHA
