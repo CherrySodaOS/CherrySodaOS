@@ -10,12 +10,28 @@
 	
 	JMP CherrySodaEntry						; Jump to the kernel entry point
 	
-	CherrySodaEntery:
-		CLI							; Clear the interrupts - we can't setup stack
-									; with interrupts
-		MOV AX, 0						; The 16-bit stack segment will be 0
-		MOV SS, AX						; We can't write directly to a segment register
-									; so, we write to ax, then write ax to ss
-		MOV SP, 0xFFFF						; The stack is located in 0xFFFF down
-		STI							; Re-enable the interrupts because we are done
-									; setting up the stack
+	InitSys:
+		MOV AH, 09h
+		MOV AL, ' '
+		MOV BH, 0
+		MOV BL, 0x1F
+		MOV CX, 2000
+		INT 10h
+	
+	CherrySodaEntry:						; We enter here from boot
+		CLI
+		MOV AX, 0
+		MOV SS, AX
+		MOV SP, 0xFFFF
+		STI
+		
+		MOV AX, 0x1000
+		MOV DS, AX
+		MOV ES, AX
+		MOV FS, AX
+		MOV GS, AX
+		
+		MOV AX, 03h
+		INT 10h
+		
+		CALL InitSys
