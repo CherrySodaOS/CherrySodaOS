@@ -14,9 +14,25 @@
 		MOV AH, 09h
 		MOV AL, ' '
 		MOV BH, 0
-		MOV BL, 0x1F
+		MOV BL, 0x0F
 		MOV CX, 2000
 		INT 10h
+		
+		MOV SI, InitMSG
+		CALL Print16
+		
+	Print16:
+		PUSHA
+		MOV AH, 0Eh
+	NC16:
+		LODSB
+		CMP AL, 0
+		JE D16
+		INT 10h
+		JMP NC16
+	D16:
+		POPA
+		RET
 	
 	CherrySodaEntry:						; We enter here from boot
 		CLI
