@@ -1,7 +1,7 @@
 ;=======================================================================;
 ;		CherrySodaOS						;
 ;			(C) Copyright All CherrySodaOS Contributors	;
-;		Stage1.ASM - The Stage 1 Bootloader			;
+;		BOOTSECT.ASM - The Bootloader				;
 ;=======================================================================;
 	
 	USE16
